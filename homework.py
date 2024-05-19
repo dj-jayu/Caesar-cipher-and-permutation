@@ -1,14 +1,22 @@
 def caesar_encription(s, key=0, dec=False):
-    alphabet = 'abcdefghijklmnopqrstuvxwyz'
-    new_str = []
-    for letter in s.lower().replace(' ', ''):
-        if dec:
-            new_letter = alphabet[(ord(letter) - ord('a') + (ord('z')-ord('a')+1 - key))%(ord('z')-ord('a')+1)]
-            new_str.append(new_letter)
-        else:
-            new_letter = alphabet[(ord(letter) - ord('a') + key)%(ord('z')-ord('a')+1)]
-            new_str.append(new_letter)
-    return ''.join(new_str)
+    alphabet = ''.join([chr(i) for i in range(ord('a'), ord('z')+1)])
+    words = s.lower().split(' ')
+    new_text = []
+    for word in words:
+        new_str = []
+        for letter in word:
+            if letter in (',','.'):
+                new_str.append(letter)
+                continue
+            if dec:
+                new_letter = alphabet[(ord(letter) - ord('a') + (ord('z')-ord('a')+1 - key))%(ord('z')-ord('a')+1)]
+                new_str.append(new_letter)
+                
+            else:
+                new_letter = alphabet[(ord(letter) - ord('a') + key)%(ord('z')-ord('a')+1)]
+                new_str.append(new_letter)
+        new_text.append(''.join(new_str))  
+    return ' '.join(new_text)
 
 result = caesar_encription('If you can meet with triumph and disaster, and treat those two impostors just the same.',key=7)
 
